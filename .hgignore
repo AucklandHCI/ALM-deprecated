@@ -1,0 +1,12 @@
+glob:bin/*
+glob:output/*
+glob:src/.metadata/*
+glob:*.log
+syntax: glob
+*.bak
+.settings/*
+
+.idea/workspace.xml
+out/*
+syntax: regexp
+^\.classpath$

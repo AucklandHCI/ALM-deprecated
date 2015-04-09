@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<almlayout>
+	<version> 2 </version>
+
+	<area>
+		<name>Area 1</name>
+		<left>X8</left>
+		<top>top</top>
+		<right>right</right>
+		<bottom>Y9</bottom>
+	</area>
+
+	<constraint>
+		<leftside>
+			<summand>
+				<coeff>1.0</coeff>
+				<var>X7</var>
+			</summand>
+			<summand>
+				<coeff>-1.0</coeff>
+				<var>left</var>
+			</summand>
+			<summand>
+				<coeff>-1.0</coeff>
+				<var>right</var>
+			</summand>
+			<summand>
+				<coeff>1.0</coeff>
+				<var>X8</var>
+			</summand>
+		</leftside>
+		<op>EQ</op>
+		<rightside>0.0</rightside>
+		<penaltypos>Infinity</penaltypos>
+	</constraint>
+
+	<constraint>
+		<leftside>
+			<summand>
+				<coeff>1.0</coeff>
+				<var>X7</var>
+			</summand>
+			<summand>
+				<coeff>-1.0</coeff>
+				<var>left</var>
+			</summand>
+			<summand>
+				<coeff>-1.0</coeff>
+				<var>Y9</var>
+			</summand>
+			<summand>
+				<coeff>1.0</coeff>
+				<var>top</var>
+			</summand>
+		</leftside>
+		<op>EQ</op>
+		<rightside>0.0</rightside>
+		<penaltypos>Infinity</penaltypos>
+	</constraint>
+
+	<constraint>
+		<leftside>
+			<summand>
+				<coeff>1.0</coeff>
+				<var>X7</var>
+			</summand>
+			<summand>
+				<coeff>-1.0</coeff>
+				<var>left</var>
+			</summand>
+			<summand>
+				<coeff>-1.0</coeff>
+				<var>bottom</var>
+			</summand>
+			<summand>
+				<coeff>1.0</coeff>
+				<var>Y10</var>
+			</summand>
+		</leftside>
+		<op>EQ</op>
+		<rightside>0.0</rightside>
+		<penaltypos>Infinity</penaltypos>
+	</constraint>
+
+	<constraint>
+		<leftside>
+			<summand>
+				<coeff>1.0</coeff>
+				<var>X8</var>
+			</summand>
+			<summand>
+				<coeff>-1.0</coeff>
+				<var>X7</var>
+			</summand>
+		</leftside>
+		<op>EQ</op>
+		<rightside>150.0</rightside>
+		<penaltypos>Infinity</penaltypos>
+	</constraint>
+
+	<constraint>
+		<leftside>
+			<summand>
+				<coeff>1.0</coeff>
+				<var>right</var>
+			</summand>
+		</leftside>
+		<op>EQ</op>
+		<rightside>284.0</rightside>
+		<penaltypos>Infinity</penaltypos>
+	</constraint>
+
+	<constraint>
+		<leftside>
+			<summand>
+				<coeff>1.0</coeff>
+				<var>bottom</var>
+			</summand>
+		</leftside>
+		<op>EQ</op>
+		<rightside>262.0</rightside>
+		<penaltypos>Infinity</penaltypos>
+	</constraint>
+
+	<constraint>
+		<leftside>
+			<summand>
+				<coeff>1.0</coeff>
+				<var>left</var>
+			</summand>
+		</leftside>
+		<op>EQ</op>
+		<rightside>0.0</rightside>
+		<penaltypos>100.0</penaltypos>
+	</constraint>
+
+	<constraint>
+		<leftside>
+			<summand>
+				<coeff>1.0</coeff>
+				<var>top</var>
+			</summand>
+		</leftside>
+		<op>EQ</op>
+		<rightside>0.0</rightside>
+		<penaltypos>100.0</penaltypos>
+	</constraint>
+</almlayout>

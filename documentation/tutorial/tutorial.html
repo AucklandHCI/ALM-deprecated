@@ -1,0 +1,132 @@
+<body>
+<h1>Getting started with the Auckland Layout Model</h1>
+
+<p>
+<i>This tutorial uses the Auckland Layout Model (ALM) to create a simple layout demonstrating concepts used by the ALM, such as tabs, areas and constraints. A simple program will be described to demonstrate this and the source code will be provided to assist your learning.</i>
+</p>
+
+<p>
+<b>Before you start:</b> Please make sure you have downloaded the Auckland Layout Model libraries as well as the native lpsolve55 runtime library. The runtime library must be kept in a path accessible from the program being executed, for example /usr/local/lib in Unix or C:\Windows\system32\ in Windows (but just keeping it in the project path should work for most platforms.)
+</p>
+
+<hr>
+
+<p>
+The tutorial will help you create a simple application. The application will have one button in the center of a window. The button will have a minimum size of 150x150 pixels, and will have a padding of uniform dimension on each side, no matter what the window size is.
+</p>
+
+<p>
+All that we need to get started is a container and a single widget/control/component. For this program we will use a button.
+</p>
+
+<p>The next step is to create a new ALMLayout object and assign it to act as the Layout Manager for the container.</p>
+<table bgcolor="#DDDDDD" cellpadding="10" border="1">
+	<tr>
+		<th>Java</th>
+		<th>C#</th>
+		<th>C++ (Haiku)</th>
+	</tr>
+	<tr>
+	<td valign="top">
+		<pre>
+ALMLayout alm = new ALMLayout();
+setLayout(alm);</pre>
+	</td>
+	<td valign="top">
+		<pre>
+private ALMLayout alm = new ALMLayout();
+
+public override LayoutEngine LayoutEngine
+{
+    get { return alm; }
+}</pre>
+	</td>
+	<td valign="top">
+		<pre>
+BALMLayout* fALM = new BALMLayout();
+SetLayout(fALM);</pre>
+	</td>
+	</tr>
+	<tr>
+		<td valign="top">Description: An instance of ALMLayout is created and assigned as the layout manager using the Container classes setLayout method.</td>
+		<td valign="top">Description: An instance of ALMLayout is created and the getter for the container's LayoutEngine is overridden to return the ALMLayout.</td>
+		<td valign="top">Description: An instance of BALMLayout is created and set as the layout manager using the SetLayout method.</td>
+	</tr>
+</table>
+
+<p>This sets the ALMLayout as the window's layout manager. However no areas have yet been added to the layout, thus no widgets are assigned to the container. For the ALMLayout to display the widget, we must configure it</p>
+	
+<p>We now are ready to specify <strong>tabs</strong>, <strong>areas</strong> and <strong>constraints</strong>:
+<ul>
+	<li>Tabs (tabulators) are either horizontal or vertical lines which separate cells within a table. Tabs are used as variables in a linear programming problem. Four tabs exist already in the empty layout, these are called <tt>left, top, right</tt> and <tt>bottom</tt> and refer to the containers edges.</li>
+	<li>Areas are rectanglular and are specified with four tabs - one for each border. Each area may be assigned a widget.</li>
+	<li>Constraints are functions which relate tabs to one another. They consists of variables (tabs), coefficients (for the variables), operators and values (more on these later).</li>
+	</ul>
+</p>
+
+<p>A simple layout somebody may wish to create with this example is simply to centre the button on the panel. This can be done quite simply, by defining a single area and assigning the button to it. The area can have its own alignment properties too, so these can be set to centre the button.</p>
+
+<div style="float:right;padding-left:20px"><img src="picture2.png" /></div>
+
+<p>The following piece of Java code will define this :</p>
+
+<pre>
+	Area a = alm.addArea(alm.getLeft(), alm.getTop(), alm.getRight(), alm.getBottom(), button);
+	a.setHorizontalAlignment(HorizontalAlignment.CENTER);
+	a.setVerticalAlignment(VerticalAlignment.CENTER);
+</pre>
+
+<p>That's not much of a demonstration of ALM, however. Let's define some linear algebra. Instead of the previous code, try this:</p>
+<pre>
+	XTab x1 = alm.addXTab();
+	XTab x2 = alm.addXTab();
+	YTab y1 = alm.addYTab();
+	YTab y2 = alm.addYTab();
+
+	Area a = alm.addArea(x1, y1, x2, y2, button);
+	
+	// constrain the button to at least 150x150
+	a.setMinimumContentSize(new Dimension(150, 150));
+	
+	// Constrain the padding to be the same size on all edges
+	alm.addConstraint(1, x1, -1, alm.getLeft(), -1, alm.getRight(), 1, x2, OperatorType.EQ, 0);
+	alm.addConstraint(1, x1, -1, alm.getLeft(), -1, y1, 1, alm.getTop(), OperatorType.EQ, 0);
+	alm.addConstraint(1, x1, -1, alm.getLeft(), -1, alm.getBottom(), 1, y2, OperatorType.EQ, 0);
+</pre>
+<p>
+	This code may need a bit of explaining: Firstly, two horizontal tabs and two vertical tabs are added to the layout specification. Then an area is defined with the new tabs as the button's borders. The next line of code defines the minimum size of the button. This is equivalent as adding two constraints to the model: 
+	<pre>	x2 - x1 > 150</pre> and <pre>	y2 - y1 > 150</pre> or <pre>
+	alm.addConstraint(1, x2, -1, x1, OperatorType.GE, 150);
+	alm.addConstraint(1, y2, -1, y1, OperatorType.GE, 150);
+	</pre>
+	<div style="float:right;padding-left:20px"><img src="picture4.jpg" /></div>
+These constraints restrict the size of area we have defined (and the button), to be at least 150x150 pixels. The last three lines of code add three more constraints, all of which state that the distance from the edge of the button to the edge of the screen is the same in any direction: <pre>	x1 - left = right - x2</pre> which becomes <pre>	x1 - left - right + x2 = 0</pre> which is equivalent to <pre>	1 * x1 + -1 * left + -1 * right + 1 * x2 = 0</pre>The formula states that <em>the distance from the left of the screen to the left of the button</em> is the same as <em>the distance from the right of the button to the right of the screen</em>. The next constraints specify that the top padding and bottom padding are the same as the left padding.
+</p>
+<p>
+You can resize the window all you like to see the ALMLayout in action. Notice that the padding is the same on all edges and the button is larger 150x150 px? This is because you have defined a linear programming problem and the ALMLayout has found a solution. Take care when designing your own layouts, as careless combinations of constraints can easily make the layout problem impossible to solve.
+</p>
+<p>
+Hopefully this short tutorial will be enough to get started using ALM and construct your own layouts. Good luck!
+</p>
+
+<hr>
+<p><i>Below is a screenshot of how the tutorial application could look on each platform and the source code for each.</i></p>
+<table cellspacing="10">
+	<tr>
+		<th>Java [<a href="Tutorial.java">source</a>]</th>
+		<th>C# [<a href="Tutorial.cs">source</a>]</th>
+		<th>C++ (Haiku) [<a href="Tutorial.cpp">source</a>]</th>
+	</tr>
+	<tr>
+		<td><img src="java.jpg" /></td>
+		<td><img src="csharp.jpg"></td>
+		<td><img src="cpp.jpg"> </td>
+	</tr>
+</table>
+
+<span id="javacode">
+<pre>
+	
+</pre>
+</span>
+</body>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ALM" default="jar" basedir="."> 
+   <!-- set properties for this build -->    
+   <property name="src" value="src"/>
+   <property name="bin" value="bin"/>
+   <property name="lib" value="libs"/>
+   <property name="javadoc" value="javadoc"/>
+   <property name="jar" value="${ant.project.name}"/>
+	   
+	<path id="classpath">
+	     <fileset dir="${lib}" includes="**/*.jar"/>
+	</path>
+   
+   <target name="build">
+     <mkdir dir="${bin}"/>  
+     <javac srcdir="${src}" destdir="${bin}" debug="true" debuglevel="lines,vars,source" classpathref="classpath"/>
+   </target>
+   
+   <target name="javadoc">  
+        <mkdir dir="${javadoc}"/>   
+      	<javadoc packagenames=""
+      	           sourcepath="${src}"
+      		       classpathref="classpath"
+      	           destdir="${javadoc}"
+      	           author="true" 
+      	           version="true" 
+      	           use="true"
+      	           windowtitle="ALM"> 
+      	  </javadoc>	
+   </target>
+    
+   <target name="jar" depends="build"> 
+       <echo message="creating jar ..."/>     
+     <jar jarfile="${jar}.jar">
+     	<fileset dir="${bin}" includes="**/*.class"/>
+     	<!--  fileset dir="${src}" includes="**/*.java"/-->
+     	<zipgroupfileset dir="${lib}" includes="*.jar" />
+     </jar>
+   	 <move todir="${bin}" file="${jar}.jar"/>
+   </target>
+   
+   <target name="clean" > 
+   	 <delete includeEmptyDirs="true">
+   	 	<fileset dir="${bin}" includes="**/*" defaultexcludes="no"/>
+   	 </delete>
+     <delete dir="${javadoc}"/>
+   </target> 
+</project>

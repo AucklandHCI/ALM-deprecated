@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="linsolve/incubator/|avm/dal/|avm/" kind="src" path="src"/>
+	<classpathentry excluding="linsolve/incubator/|linsolve/unittests/|linsolve/unittests/" kind="src" path="test"/>
+	<classpathentry excluding="avm/" kind="src" path="examples"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="libs/lpsolve55j.jar"/>
+	<classpathentry kind="lib" path="libs/commons-math3-3.0.jar" sourcepath="libs/commons-math3-3.0-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/aim-java/libs/commons-math3-3.0-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="libs/matlabcontrol-4.0.0.jar"/>
+	<classpathentry kind="lib" path="libs/opt4j-2.7.jar"/>
+	<classpathentry kind="lib" path="libs/pdstore.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="output"/>
+</classpath>

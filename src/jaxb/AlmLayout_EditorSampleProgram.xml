@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<almlayout>
+	<version> 2 </version>
+
+	<area>
+		<name>button1</name>
+		<left>Var1</left>
+		<top>Var2</top>
+		<right>Var5</right>
+		<bottom>Var8</bottom>
+	</area>
+
+	<area>
+		<name>user2's widget</name>
+		<left>Var5</left>
+		<top>Var2</top>
+		<right>Var6</right>
+		<bottom>Var8</bottom>
+	</area>
+
+	<area>
+		<name>user3's widget</name>
+		<left>Var1</left>
+		<top>Var8</top>
+		<right>Var5</right>
+		<bottom>Var9</bottom>
+	</area>
+
+	<area>
+		<name>user4's widget</name>
+		<left>Var5</left>
+		<top>Var8</top>
+		<right>Var6</right>
+		<bottom>Var9</bottom>
+	</area>
+
+	<area>
+		<name>user5's widget</name>
+		<left>Var1</left>
+		<top>Var9</top>
+		<right>Var5</right>
+		<bottom>Var10</bottom>
+	</area>
+
+	<area>
+		<name>user1's widget</name>
+		<left>Var5</left>
+		<top>Var9</top>
+		<right>Var6</right>
+		<bottom>Var10</bottom>
+	</area>
+
+	<constraint>
+		<leftside>
+			<summand>
+				<coeff>2.0</coeff>
+				<var>Var5</var>
+			</summand>
+			<summand>
+				<coeff>-1.0</coeff>
+				<var>Var6</var>
+			</summand>
+		</leftside>
+		<op>EQ</op>
+		<rightside>0.0</rightside>
+		<penaltyneg>Infinity</penaltyneg>
+		<penaltypos>Infinity</penaltypos>
+	</constraint>
+
+	<constraint>
+		<leftside>
+			<summand>
+				<coeff>2.0</coeff>
+				<var>Var8</var>
+			</summand>
+			<summand>
+				<coeff>-1.0</coeff>
+				<var>Var9</var>
+			</summand>
+		</leftside>
+		<op>EQ</op>
+		<rightside>0.0</rightside>
+		<penaltyneg>Infinity</penaltyneg>
+		<penaltypos>Infinity</penaltypos>
+	</constraint>
+
+	<constraint>
+		<leftside>
+			<summand>
+				<coeff>1.0</coeff>
+				<var>Var8</var>
+			</summand>
+			<summand>
+				<coeff>1.0</coeff>
+				<var>Var9</var>
+			</summand>
+			<summand>
+				<coeff>-1.0</coeff>
+				<var>Var10</var>
+			</summand>
+		</leftside>
+		<op>EQ</op>
+		<rightside>0.0</rightside>
+		<penaltyneg>Infinity</penaltyneg>
+		<penaltypos>Infinity</penaltypos>
+	</constraint>
+</almlayout>

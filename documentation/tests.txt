@@ -1,0 +1,160 @@
+=== Environment where the tests are performed ===
+Operating system: Windows Vista Enterprise, Service Pack 1
+Build and run tool: Eclipse 3.4.1
+Java SDK: 1.6.0_11
+
+
+=== Tests ===
+Steps for a basic test:
+(Note step 1 to 5 are the common steps that are used in many tests.)
+1. Open Eclipse and switch the workspace to (one level above "aim-java")
+2. In the Package Explorer of Eclipse, browse to Program.java at aim-java/src/visualConstraintTest/Program.java and open it.
+3. click the Run button to run the application.
+   3.1. If it does not run, it might be using a previous run configuration. Go to Run -> Run Configurations in the menu. On the left panel, delete all the existing run configurations listed under "Java Application". Exit and click the Run button to run the application.
+4. A window with buttons appears. Click the top left button that contains the label "Click to edit" to enter the edit mode.
+5. The Properties window appears when the GUI is in the edit mode. Click the Constraints tab of the Properties window.
+Expected Result: A list of constraints is displayed. 
+6. The last 7 constraints (starting with "1.0 Var5 = 150.0") in the list are used for testing changing the constraints. Click on one constraint to select it.
+Expected Result: The selected constraint is highlighted. The values of the selected constraint become editable in the Properties window. The tabs that are relevant to this constraint are highlighted in the application GUI window.
+7. In the application GUI window, click on the constraint and hold down the button. While the mouse button is still pressed, move the mouse to a different position.
+Expected Result: A grey line shows where the tabstop will end up to be. A number displays the number of pixels it is from the top or left side of the window.
+8. Release the mouse button.
+Expected Results: The tabstop is moved to the released position. 
+The layout is re-computed using the updated constraint and other unchanged constraints. 
+e.g. The widgets that are aligned to the moved tabstop are correctly aligned. Some widgets are resized to retain its proportion between two tabstops.
+The grey line and numerical information is replaced by a coloured line and a coloured number.
+The selected constarint in the Properties window should display the updated values.
+
+
+
+== In the properties window
+Test 1. Edit the coefficient of a variable (tabstop).
+Test 1.1. Edit the coefficient of a variable (tabstop) to a valid and reasonable value.
+
+Steps:
+1-5. Common steps to run the program, switch to the edit mode, and enter the Constraint tab of the Properties window.
+6. In the Properties window, find a constraint that has only one summand on the left hand side. Click on it to select it.
+"1.0 Var5 = 150.0" is the chosen constraint in this test. The application GUI displays that the width between the left edge of the window and the tabstop is 150 pixels.
+7. Type a new value in the text box that contains the coefficient of the variable. Then press enter.
+In this test, 1.2 is entered.
+
+Expected Results:
+The constraint becomes "1.2 Var5 = 150.0". The application GUI shows the width between the left edge to the tabstop is 125 pixels.
+
+Repeat with the values 2.5, 0.75, 1.6 would change the width to 60, 200, and 93.75 respectively. They are correct.
+Possible minor issue:
+When the resultant width is not fully divisible, the GUI displays the number with many digits after the decimal point.
+
+Test 1.2. Edit the coefficient of a variable (tabstop). Enter an invalid input or an extreme value.
+1-5. Common steps to run the program, switch to the edit mode, and enter the Constraint tab of the Properties window.
+6. In the Properties window, find a constraint that has only one summand on the left hand side. Click on it to select it.
+"1.0 Var5 = 150.0" is the chosen constraint in this test. The application GUI displays that the width between the left edge of the window and the tabstop is 150 pixels.
+7. Type a new value in the text box that contains the coefficient of the variable. Then press enter.
+
+Expected Results: the invalid input is rejected. The constraint and the layout remain unchanged.
+                  The behaviour for extreme input values is not specified.
+Actual Results for different inputs:
+Input: -1.2, a negative number. 
+Result: It accepts it as 1.2 and makes the width to be 125.
+Input: 1abc, a string that contains non-numerical characters. 
+Result: It rejects it and the coefficient reverts to the previous value.
+Input: Empty string.
+Result: It rejects it and the coefficient reverts to the previous value.
+Input: 0.
+Result: In the application GUI. The number on the width becomes the string "Infinity", but the tabstop remains the same.
+Input: 3.9E-400, a very small number.
+Result: The coefficient text box becomes 0. The number on the width becomes the string "Infinity", but the tabstop remains the same.
+Input: 4.82E500, a very large number.
+Result: The coefficient text box displays the word "Infinity". In the application GUI. The number on the width becomes 0.0 but the tabstop remains the same.
+The following exception occurs:
+linearProgramming.LinearProgrammingException: Could not solve the layout specification (NUMFAILURE). Saved specification in file failed-layout.txt
+	at alm.ALMLayout.layout(ALMLayout.java:137)
+	at alm.ALMLayout.layoutContainer(ALMLayout.java:314)
+	at alm.ALMEditorCanvas.paintComponent(ALMEditor.java:836)
+Then the application GUI does not show tabstop changes for subsequent changes in the constraints.
+
+
+Test 2. Change the variable of a summand.
+Test 2.1. Change the variable of a summand to a tabstop that can be moved with the constraint.
+Steps:
+1-5. Common steps to run the program, switch to the edit mode, and enter the Constraint tab of the Properties window.
+6. In the Properties window, find a constraint that has only one summand on the left hand side. Click on it to select it.
+"1.0 Var5 = 150.0" is the chosen constraint in this test. The application GUI displays that the width between the left edge of the window and the tabstop is 150 pixels.
+7. Change the right-hand side value to 300. Press Enter. The constraint is now "1.0 Var5 = 300.0"
+8. Use the dropdown list to change the variable to Var7. The constraint is now "1.0 Var7 = 300.0"
+9. Change the right-hand side value to 220. Press Enter. The constraint is now "1.0 Var7 = 220.0"
+
+Results:
+After step 7, the tabstop var5 is moved to x = 300 in the application GUI. The text indicates the width is 300.
+After step 8, the coloured tabstop in the application GUI becomes the x-tab that aligns the right border of button5 and the left border of button6.
+Presumably, this tab is Var7. Var7 is moved to x = 300 in the GUI application.
+After step 9, the RHS value becomes 220. Var7 is moved to x = 220 in the GUI application.
+
+
+Test 3. Change the equality/inequality sign (=, <=, >=)
+Steps:
+1-5. Common steps to run the program, switch to the edit mode, and enter the Constraint tab of the Properties window.
+6. In the Properties window, find a constraint that has only one summand on the left hand side. Click on it to select it.
+"1.0 Var5 = 150.0" is the chosen constraint in this test. The application GUI displays that the width between the left edge of the window and the tabstop is 150 pixels.
+7. Change the inequality sign to <=.
+8. change the inequality sign to >=.
+9. Change the constraint to "1.0 Var5 = 360.0"
+10. change the inequality sign to >=.
+11. Change the inequality sign to <=.
+
+Results:
+After step 7, The bidirectional arrow and the width number disappear in the application GUI. The coloured tabstop Var5 remains at the same position.
+After step 8, the coloured tabstop var5 is moved to the right in the application GUI.
+After step 9, the coloured tabstop var5 is moved x = 360 in the application GUI.
+After step 10, The bidirectional arrow and the width number disappear in the application GUI. Var5 remains at x = 360.
+After step 11, Var5 is moved to the left in the application GUI.
+
+
+Tests to do:
+Test 4. Edit the right-hand side term
+Test 4.1. Edit the right-hand side term to a valid and reasonable value.
+Steps:
+1-5. Common steps to run the program, switch to the edit mode, and enter the Constraint tab of the Properties window.
+6. In the Properties window, find a constraint that has only one summand on the left hand side. Click on it to select it.
+"1.0 Var5 = 150.0" is the chosen constraint in this test. The application GUI displays that the width between the left edge of the window and the tabstop is 150 pixels.
+7. Edit the value in the text box of the right-hand side term to 100.
+
+Results:
+The tabstop var5 is moved to x = 100 in the application GUI. The text indicates the width is 100.
+
+Test 4.2 Edit the right-hand side term. Enter an invalid input or an extreme value.
+Steps 
+1-5. Common steps to run the program, switch to the edit mode, and enter the Constraint tab of the Properties window.
+6. In the Properties window, find a constraint that has only one summand on the left hand side. Click on it to select it.
+"1.0 Var5 = 150.0" is the chosen constraint in this test. The application GUI displays that the width between the left edge of the window and the tabstop is 150 pixels.
+7. Edit the value in the text box of the right-hand side term to various inputs.
+
+Results for various inputs:
+Input: -120, a negative number. 
+Result: It accepts it as 120 and makes the width to be 120.
+Input: 1abc, a string that contains non-numerical characters. 
+Result: It rejects it and the coefficient reverts to the previous value.
+Input: Empty string.
+Result: It rejects it and the coefficient reverts to the previous value.
+Input: 0.
+Result: The number on the width becomes 0.0. The tabstop moves to x = 0.
+Input: 3.9E-400, a very small number.
+Result: The number on the width becomes 0.0. The tabstop moves to x = 0.
+Input: 4.82E500, a very large number.
+Result: The text box has the value 4.82E500. In the application GUI, the number on the width becomes the string "Infinity", but the tabstop remains the same.
+However, if the right-hand term is edited again, it throws the following exception:
+linearProgramming.LinearProgrammingException: Could not solve the layout specification (UNBOUNDED). Saved specification in file failed-layout.txt
+	at alm.ALMLayout.layout(ALMLayout.java:137)
+	at alm.ALMLayout.layoutContainer(ALMLayout.java:314)
+	at alm.ALMEditorCanvas.paintComponent(ALMEditor.java:836)
+Then the application GUI does not show tabstop changes for subsequent changes in the constraints.
+
+
+Click Add New Constraint.
+
+== On the appication GUI window
+Move an absolute constraint vertically.
+Move an absolute constraint horizontally.
+Move a relative constraint vertically.
+Move a relative constraint horizontally.
+Resize the GUI window.

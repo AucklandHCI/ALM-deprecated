@@ -1,0 +1,12 @@
+/*
+Copyright(c) 2006 and onward, University of Auckland
+
+This license covers all content in the Auckland Layout Model (ALM) repository, unless explicitly excluded or covered by other licenses.
+The software and other contents are provided in the context of academic project work.
+Use of this software is only permitted for the academic project the software is provided for,
+and only for the duration of that project and subject to the following conditions:
+1. Software developed by using ALM in tests and demonstrations must be licensed under the GNU Lesser Public License.
+2. A submission of one version of the software must be made at the end of the project to the ALM repository.
+
+THE COPYRIGHTED MATERIAL UNDER THIS LICENSE IS NOT PERMITTED TO BE USED IN ANY CIRCUMSTANCE THAT CAN CREATE DAMAGE OR LIABILITY. THIS ALSO IMPLIES A DISCLAIMER FOR ALL LIABILITY.
+*/

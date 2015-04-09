@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="1.0">
+
+
+<xs:element name="almlayout">
+  <xs:complexType>
+   <xs:sequence>    
+     <xs:element name="version" type="xs:integer" minOccurs="1" maxOccurs="1"/>           
+     <xs:element name ="area" minOccurs="0" maxOccurs="unbounded">
+       <xs:complexType>
+         <xs:sequence>
+           <xs:element name="name" type="xs:string"/>
+	   <xs:element name="left" type="xs:string"/>
+	   <xs:element name="top" type="xs:string"/>
+	   <xs:element name="right" type="xs:string"/>
+           <xs:element name="bottom" type="xs:string"/>  
+           <xs:element name="leftinset" type="xs:integer"/>
+           <xs:element name="topinset" type="xs:integer"/>
+           <xs:element name="rightinset" type="xs:integer"/>
+           <xs:element name="bottominset" type="xs:integer"/>
+           <xs:element name="horizontalalignment" type="xs:string"/>
+           <xs:element name="verticalalignment" type="xs:string"/>
+         </xs:sequence>
+       </xs:complexType>
+     </xs:element>   
+     <xs:element name = "constraint" minOccurs="0" maxOccurs="unbounded">
+       <xs:complexType>
+         <xs:sequence>
+           <xs:element name="leftside" minOccurs="0" maxOccurs="unbounded">
+             <xs:complexType>
+               <xs:sequence>
+                <xs:element name = "summand" minOccurs="0" maxOccurs="unbounded">
+                  <xs:complexType>
+                    <xs:sequence>
+                    	<xs:element name="coeff" type="xs:decimal" />
+                    	<xs:element name="var" type="xs:string" />
+                    	<xs:element name="type"
+                    		type="xs:string">
+                    	</xs:element>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+           </xs:element>
+           <xs:element name="op" type="xs:string"/>
+           <xs:element name="rightside" type="xs:decimal"/>
+           <xs:element name="penaltyneg" type="xs:string"/>
+           <xs:element name="penaltypos" type="xs:string"/>
+         </xs:sequence>
+       </xs:complexType>
+     </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>
