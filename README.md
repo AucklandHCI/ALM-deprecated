@@ -8,10 +8,9 @@ The development environment recommended is IntelliJ (Eclipse will also work but 
 
 1. Install Software:
 First you need to install:
-- Scala: http://scala-lang.org
-- IntelliJ (at least version 14): http://www.jetbrains.com/idea/
-- Scala plugin for IntelliJ:
-  In IntelliJ choose File -> Settings -> Plugins -> Browse repositories -> Search for "scala"... and install.
+	- Scala: http://scala-lang.org
+	- IntelliJ (at least version 14): http://www.jetbrains.com/idea/
+	- Scala plugin for IntelliJ: In IntelliJ choose File -> Settings -> Plugins -> Browse repositories -> Search for "scala"... and install.
 
 2. Open the PDStore project in IntelliJ
 Do not "import" it, this won't work -- just open its folder (File -> Open).
