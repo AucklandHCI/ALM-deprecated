@@ -6,13 +6,12 @@ The development environment recommended is IntelliJ (Eclipse will also work but 
 
 ##Installation
 
-1. Install Software:
-First you need to install:
+1. Install Software
 	- Scala: http://scala-lang.org
 	- IntelliJ (at least version 14): http://www.jetbrains.com/idea/
 	- Scala plugin for IntelliJ: In IntelliJ choose File -> Settings -> Plugins -> Browse repositories -> Search for "scala"... and install.
 
-2. Open the PDStore project in IntelliJ
+2. Open the PDStore project in IntelliJ.
 Do not "import" it, this won't work -- just open its folder (File -> Open).
 
 3. Register JDK:
@@ -24,12 +23,13 @@ In File -> Project Structure -> Global Libraries, look for a global library call
 5. Install lp_solve [OPTIONAL]
 This is only necessary if you would like to use the external lp_solve solver, as opposed to one of the built-in solvers.
 AIM is using lp_solve_5.5.2.0. There are actually three libraries related to lpsolver which are used by ALM:
-- lpsolve55j.jar  : same for 32 and 64 bit (AIM source and library already contain this in the folder libs)
+
+	- lpsolve55j.jar  : same for 32 and 64 bit (AIM source and library already contain this in the folder libs)
 The following two libraries are platform dependent so proper versions of them for the target platform should be copied
 to the standard library directory. On Windows, a typical place would be \WINDOWS or \WINDOWS\SYSTEM32. On Linux, a typical
 place would be the directory /usr/local/lib. For more information, refer to http://web.mit.edu/lpsolve_v5520/doc/Java/README.html.
-- lpsolve55j.dll which can be downloaded from http://hivelocity.dl.sourceforge.net/project/lpsolve/lpsolve/5.5.2.0/lp_solve_5.5.2.0_java.zip.
-- lpsolve55.dll  which can be downloaded from http://sourceforge.net/projects/lpsolve/files/lpsolve/5.5.2.0/lp_solve_5.5.2.0_dev_<your-platform>.zip
+	- lpsolve55j.dll which can be downloaded from http://hivelocity.dl.sourceforge.net/project/lpsolve/lpsolve/5.5.2.0/lp_solve_5.5.2.0_java.zip.
+	- lpsolve55.dll  which can be downloaded from http://sourceforge.net/projects/lpsolve/files/lpsolve/5.5.2.0/lp_solve_5.5.2.0_dev_<your-platform>.zip
 
 6. Run PDStore examples:
 Everything should be ready to go now. Test it by running the examples. In the project tree, find the files in package alm.examples and right-click -> Run.
@@ -37,8 +37,8 @@ Everything should be ready to go now. Test it by running the examples. In the pr
 
 ## Documentation
 
-The most recent code documentation is contained in JavaDoc comments in the various files.
-Other starting points are:
+The most recent code documentation is contained in JavaDoc comments in the various files. Other starting points are:
+
 - The GUI layout specification and editing examples in alm.examples
 - The project report about the ALM and ALE code base by Irene Zhang:
 https://www.cs.auckland.ac.nz/~lutteroth/publications/theses/ALE-IreneZhang-2014.pdf
@@ -55,8 +55,9 @@ http://www.cs.auckland.ac.nz/~lutteroth/publications/Lutteroth2008-LayoutReverse
 ## Contact
 
 Project maintainers:
-Christof Lutteroth, christof@cs.auckland.ac.nz
-Gerald Weber, gerald@cs.auckland.ac.nz
+
+- Christof Lutteroth, christof@cs.auckland.ac.nz
+- Gerald Weber, gerald@cs.auckland.ac.nz
 
 Project website:
 https://github.com/aucklandhci/alm
